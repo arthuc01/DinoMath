@@ -647,7 +647,51 @@ function portraitPanel(compact=false){const d=currentDino();if(!d)return '';
  return `<div class="portrait-panel ${compact?'compact':''}"><div><div class="eyebrow">🧩 Mystery dinosaur</div><strong>${state.revealSteps}/8 picture pieces</strong><p class="tiny muted">Every completed puzzle reveals another piece. At four, find an egg. At eight, it hatches!</p></div>${revealMosaic(d,state.revealSteps,true)}</div>`;
 }
 function header(){return `<header class="header"><button class="logo" data-action="home" aria-label="Home"><img src="./assets/dr-bones/portrait.webp" alt=""><span>Dino<em>Math</em></span></button><div class="top-actions"><button class="quiet-toggle" data-action="quiet" aria-pressed="${state.quiet}">${state.quiet?'◉ Quiet on':'◌ Quiet mode'}</button><button class="chip" data-action="parent">⚙ Parent</button></div></header>`;}
-function render(){document.body.classList.toggle('quiet',!!state.quiet);app.innerHTML=`<div class="shell">${header()}<main id="main-content">${screen==='home'?home():screen==='zone'?zonePage():screen==='mission'?mission():screen==='end'?endPage():screen==='journal'?journal():screen==='dig'?digPage():screen==='workshop'?workshopPage():screen==='museum'?museumPage():parent()}</main><footer class="footer">DinoMath 0.5 · A calm, local-first prototype · No ads, accounts or tracking</footer></div>${rewardPopup&&showRewardModal?rewardOverlay():''}`;}
+
+/* Transparent dinosaur cut-outs for location cards; gallery artwork stays unchanged. */
+const zoneArtCache = new Map();
+function prepareZoneArt() {
+  document.querySelectorAll('.zone-card .zone-art').forEach(img => {
+    const original = img.getAttribute('src');
+    if (!original) return;
+    const ready = zoneArtCache.get(original);
+    if (ready) { img.src = ready; img.style.opacity = '1'; return; }
+    const source = new Image();
+    source.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = source.naturalWidth; canvas.height = source.naturalHeight;
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        if (!ctx) throw new Error('Canvas unavailable');
+        ctx.drawImage(source, 0, 0);
+        const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = frame.data;
+        for (let i=0; i<pixels.length; i+=4) {
+          const dr=pixels[i]-254, dg=pixels[i+1]-246, db=pixels[i+2]-233;
+          const distance=Math.sqrt(dr*dr+dg*dg+db*db);
+          const alpha=Math.max(0,Math.min(1,(distance-9)/25));
+          if (alpha<=0) { pixels[i+3]=0; continue; }
+          if (alpha<1) {
+            pixels[i]=Math.max(0,Math.min(255,(pixels[i]-(1-alpha)*254)/alpha));
+            pixels[i+1]=Math.max(0,Math.min(255,(pixels[i+1]-(1-alpha)*246)/alpha));
+            pixels[i+2]=Math.max(0,Math.min(255,(pixels[i+2]-(1-alpha)*233)/alpha));
+          }
+          pixels[i+3]=Math.round(255*alpha);
+        }
+        ctx.putImageData(frame,0,0);
+        const cutout=canvas.toDataURL('image/webp',.83);
+        zoneArtCache.set(original,cutout);
+        if (img.isConnected && img.getAttribute('src')===original) {
+          img.src=cutout;img.style.opacity='1';
+        }
+      } catch (_error) { if (img.isConnected) img.style.opacity='1'; }
+    };
+    source.onerror=()=>{if(img.isConnected) img.style.opacity='1';};
+    source.src=original;
+  });
+}
+
+function render(){document.body.classList.toggle('quiet',!!state.quiet);app.innerHTML=`<div class="shell">${header()}<main id="main-content">${screen==='home'?home():screen==='zone'?zonePage():screen==='mission'?mission():screen==='end'?endPage():screen==='journal'?journal():screen==='dig'?digPage():screen==='workshop'?workshopPage():screen==='museum'?museumPage():parent()}</main><footer class="footer">DinoMath 0.5.1 · A calm, local-first prototype · No ads, accounts or tracking</footer></div>${rewardPopup&&showRewardModal?rewardOverlay():''}`;prepareZoneArt();}
 function home(){const suggested=skillById[state.preferredSkill]?.playable?skillById[state.preferredSkill]:suggestSkill(state.progress);
  return `<section class="hero" aria-label="Dinosaur sanctuary"><div class="hero-content"><div class="eyebrow">Your prehistoric research station</div><h1 class="h1">Explore. Solve.<br>Discover.</h1><p>Build a dinosaur collection, solve mysteries and explore at your own pace. One question is enough for a visit.</p><div class="hero-actions"><button class="main-btn" data-action="route" data-zone="${esc(suggested.zone)}" data-skill="${esc(suggested.id)}">Continue Discovery Trail →</button><button class="alt-btn" data-action="dig">Dig for fossils 🦴</button><button class="alt-btn" data-action="museum">Build a skeleton 🦴</button></div><p class="tiny" style="margin-top:14px"><button class="text-button" data-action="journal">🎒 View my collection · ${totalEarned()} finds</button></p></div><img class="hero-bones" src="./assets/dr-bones/welcome.webp" alt="Dr Bones, your friendly palaeontologist guide"></section>
  <div class="hero-banner"><img src="./assets/dr-bones/portrait.webp" alt=""><div><strong>Dr Bones:</strong>“Hello, ${esc(state.name)}! Questions are things we investigate, one step at a time.”</div></div>
