@@ -133,3 +133,55 @@
   .bones-coach-avatar{height:58px;width:40px}
 }
 @media(prefers-reduced-motion:reduce){.hero-bones,.bones-box img,.bones-whisper img{animation:none!important}}
+
+
+/* DinoMath 0.5.1 — a dedicated top row keeps full dinosaur silhouettes within location cards. */
+.zone-card {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:100px auto auto minmax(4px,1fr) auto;
+  gap:5px;
+  justify-content:stretch;
+  align-items:start;
+  align-content:stretch;
+  min-width:0;
+  padding:14px 16px 17px;
+}
+.zone-card .zone-emoji {
+  grid-row:1;
+  justify-self:start;
+  align-self:center;
+  margin:0;
+  line-height:1;
+  position:relative;
+  z-index:1;
+}
+.zone-card .zone-art {
+  position:absolute;
+  top:12px;
+  right:11px;
+  width:calc(100% - 88px);
+  max-width:170px;
+  height:95px;
+  object-fit:contain;
+  object-position:center;
+  opacity:0;
+  pointer-events:none;
+  transform:none;
+  filter:drop-shadow(0 5px 5px rgba(35,70,45,.15));
+}
+.zone-card .zone-name {grid-row:2;max-width:100%;margin:0;font-size:20px;line-height:1.15;}
+.zone-card .zone-sub {grid-row:3;max-width:100%;margin:0;}
+.zone-card .zone-count {grid-row:5;max-width:100%;margin-top:6px;}
+.quiet .zone-card {grid-template-rows:0 auto auto minmax(0,1fr) auto;}
+.quiet .zone-card .zone-art {display:none;}
+@media(max-width:700px) {
+  .zone-card {grid-template-rows:91px auto auto minmax(4px,1fr) auto;}
+  .zone-card .zone-art {top:12px;right:9px;width:calc(100% - 69px);height:86px;max-width:155px;}
+  .zone-card .zone-name {font-size:18px;}
+}
+@media(max-width:400px) {
+  .zone-card {grid-template-rows:77px auto auto minmax(4px,1fr) auto;padding:12px;}
+  .zone-card .zone-art {top:9px;right:7px;height:74px;width:calc(100% - 60px);max-width:125px;}
+  .zone-card .zone-emoji {font-size:35px;}
+}
