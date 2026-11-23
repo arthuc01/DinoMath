@@ -4,7 +4,7 @@
 
 DinoMath combines adaptive practice with playful exploration, helpful explanations from **Dr Bones**, dinosaur eggs and fossils to discover, and a museum where children can assemble skeletons. It was designed with children who find traditional worksheets stressful in mind, but is intended to be enjoyable and useful for a wide range of learners.
 
-> **Status:** Experimental prototype (v0.5). Not a validated teaching or assessment programme. Mathematical content and accessibility need further educator and learner testing.
+> **Status:** Experimental prototype (v0.5.1). Not a validated teaching or assessment programme. Mathematical content and accessibility need further educator and learner testing.
 
 ## Play
 
@@ -46,7 +46,7 @@ The language throughout the game has been revised to be calmer, more specific an
 - **Assemble skeletons:** reconstruct simplified Baryonyx, Iguanodon, Scelidosaurus and Triceratops museum displays using seven sections each, without needing to grind for parts.
 - **Play at their own pace:** no timers, public rankings, punishment streaks or compulsory long sessions.
 
-The dinosaur collection includes species from Britain and Europe as well as some better-known international favourites. The stylised portraits are matched to their respective species.
+The dinosaur collection includes species from Britain and Europe as well as some better-known international favourites. The stylised portraits are matched to their respective species. Location cards display contained, background-free dinosaur silhouettes (including at narrow mobile widths), while the original portraits remain available in the collection and hatching screens.
 
 ## Learning approach
 
@@ -73,7 +73,7 @@ README.md            Project guide
 LICENSE              Unlicense
 ```
 
-This deployment uses the consolidated v0.5 browser bundle. A future maintenance step is to restore its separately maintained curriculum, maths-engine, teaching, reward and museum modules to the repository, with automated tests and a reproducible build process.
+This deployment uses the consolidated v0.5.1 browser bundle. A future maintenance step is to restore its separately maintained curriculum, maths-engine, teaching, reward and museum modules to the repository, with automated tests and a reproducible build process.
 
 ## Educational and technical limitations
 
