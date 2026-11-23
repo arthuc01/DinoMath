@@ -2,9 +2,9 @@
 
 **A low-pressure dinosaur maths adventure for learners working across England's KS1–KS3 curriculum.**
 
-DinoMath combines adaptive practice with playful exploration, helpful explanations from **Dr Helix**, dinosaur eggs and fossils to discover, and a museum where children can assemble skeletons. It was designed with children who find traditional worksheets stressful in mind, but is intended to be enjoyable and useful for a wide range of learners.
+DinoMath combines adaptive practice with playful exploration, helpful explanations from **Dr Bones**, dinosaur eggs and fossils to discover, and a museum where children can assemble skeletons. It was designed with children who find traditional worksheets stressful in mind, but is intended to be enjoyable and useful for a wide range of learners.
 
-> **Status:** Experimental prototype (v0.4.2). Not a validated teaching or assessment programme. Mathematical content and accessibility need further educator and learner testing.
+> **Status:** Experimental prototype (v0.5). Not a validated teaching or assessment programme. Mathematical content and accessibility need further educator and learner testing.
 
 ## Play
 
@@ -30,12 +30,18 @@ In the repository, go to **Settings → Pages → Build and deployment**, choose
 
 Pages publication must be enabled separately; committing the code does not automatically activate it.
 
+## Dr Bones — new guide and character art
+
+The original DNA mascot has been replaced by **Dr Bones**, a welcoming cartoon palaeontologist. Nine species-independent character assets now provide distinct poses for welcome, thinking, maths explanations, fossil discoveries, egg rewards, investigating and gentle support after mistakes.
+
+The language throughout the game has been revised to be calmer, more specific and less repetitive, without changing mathematical answers or the underlying progression rules. See [CHARACTER_ASSETS.md](CHARACTER_ASSETS.md) for the asset list, display guidance and voice style.
+
 ## What children can do
 
 - **Explore eight maths regions:** Nest Valley, Fernwood Grove, Tidal Cliffs, Crystal Caverns, Jurassic Quarry, Volcano Ridge, Research Station and Migration Plains.
 - **Choose Discovery Trails or Skill Focus:** mixed expeditions or structured practice in one specific skill.
 - **Try varied puzzle interactions:** calculations, number lines, fraction models, number ordering, spotting errors and more.
-- **Get help from Dr Helix:** hints, worked solutions and hands-on workshops, including signed numbers, fractions, balancing equations and proportional reasoning.
+- **Get help from Dr Bones:** hints, worked solutions and hands-on workshops, including signed numbers, fractions, balancing equations and proportional reasoning.
 - **Build a collection:** find dinosaur eggs, hatch species-matched dinosaurs, reveal portraits in pieces, and collect repeatable fossils and tools.
 - **Assemble skeletons:** reconstruct simplified Baryonyx, Iguanodon, Scelidosaurus and Triceratops museum displays using seven sections each, without needing to grind for parts.
 - **Play at their own pace:** no timers, public rankings, punishment streaks or compulsory long sessions.
@@ -67,7 +73,7 @@ README.md            Project guide
 LICENSE              Unlicense
 ```
 
-This deployment uses the consolidated v0.4.2 browser bundle. A future maintenance step is to restore its separately maintained curriculum, maths-engine, teaching, reward and museum modules to the repository, with automated tests and a reproducible build process.
+This deployment uses the consolidated v0.5 browser bundle. A future maintenance step is to restore its separately maintained curriculum, maths-engine, teaching, reward and museum modules to the repository, with automated tests and a reproducible build process.
 
 ## Educational and technical limitations
 
